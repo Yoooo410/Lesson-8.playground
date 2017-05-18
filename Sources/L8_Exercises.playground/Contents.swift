@@ -30,21 +30,29 @@ class Teenager: Babysitter {
         self.patience = patience
     }
     func playCandyland(_ numberOfTimes: Int) {
-        return "Your number of times\(numberOfTimes)"
+        var time = 1
+        while time <= numberOfTimes {
+            print("Let's play CnadyLand!")
+            time += 1
+        }
     }
 
     func read(_ book: String, firstLine: String, asleep: Bool) -> Bool {
-        
+        if !asleep {
+            print("The first line of \(book) says\(firstLine)")
+        }
     }
 
-}
+ }
 
 protocol Babysitter {
     func playCandyland(_ numberOfTimes: Int)
     func read(_ book: String, firstLine: String, asleep: Bool) -> Bool
 }
 
-
+let me = Teenager.init(age: 23, responsible: true, patience: .medium)
+me.playCandyland(2)
+me.read("Harry Potter", firstLine: "The boy who lived", asleep: false)
 //: __Problem 2__
 //:
 //:Below find the class Animal along with the Adorable protocol.
@@ -57,6 +65,7 @@ protocol Babysitter {
 enum Size {
     case tiny, small, medium, large, xLarge
 }
+
 protocol Adorable {
     var size: Size { get }
     var softFur: Bool { get }
@@ -70,18 +79,29 @@ var cuteMouse = UIImage(named: "mouseBall")
 class Animal: Adorable {
     let species: String
     let numberOfLegs: Int
+    var size: Size
+    var softFur: Bool
     
-    init(species: String, numberOfLegs: Int) {
+    init(species: String, numberOfLegs: Int, size: Size, softFur: Bool) {
         self.species = species
         self.numberOfLegs = numberOfLegs
+        self.size = size
+        self.softFur = softFur
     }
-    func frolick()
     
-    func curlIntoSmallBall()
+    func frolick() {
+        print(":p")
+    }
+    
+    func curlIntoSmallBall() {
+        print("Oinw I'm a lttle ball")
+    }
 
 }
 var pic = UIImage(named: "frolick.jpg")
-
+let puppy = Animal.init(species: "Golden Retriver", numberOfLegs: 4, size: .tiny, softFur: true)
+puppy.frolick()
+puppy.curlIntoSmallBall()
 //: __Problem 3__
 //:
 //: Below you'll find the Friend class. The Friend class has implemented the Mover protocol, but the Mover protocol was accidentally deleted.
@@ -91,7 +111,7 @@ var pic = UIImage(named: "frolick.jpg")
 //:
 //: __3b.__ Edit the Friend class so that it adopts the Mover protocol.
 
-class Friend {
+class Friend: Mover {
     var reliability: Int
     var likesYou: Bool
     
@@ -123,6 +143,12 @@ class Friend {
     }
 }
 
+protocol Mover {
+    var willWorkForPizzaAndBeer: Bool { get }
+    
+    func carryCouch () -> String
+    func loadVan(_ empty: Bool) -> Bool
+}
 //: Problem 4
 //:
 //: Below you can see that the Squirrel class conforms to the Hoarder protocol.
@@ -170,6 +196,14 @@ class ScrubJay {
     func fly() -> String {
         return "Swoop!"
     }
+    
+    func cache(foodItem: String) -> String {
+        return "I'll be back for you later, little \(foodItem)s."
+    }
+    
+    func pilfer() -> String {
+        return "Jackpot! Your stash is mine!"
+    }
 }
 
 //: __Problem 5__
@@ -216,6 +250,16 @@ class Minion {
     }
 }
 
+extension Minion: DirtyDeeds {
+    func cheat() {
+        print("Mha ha ha!")
+    }
+    
+    func steal() {
+        print("Mha ha ha!")
+    }
+}
+
 //: __Problem 6__
 //:
 //: This extension from the [Coding Explorer Blog](http://www.codingexplorer.com/swift-extensions/) makes it easier to initialize a UIColor object from RGB values that are integers.
@@ -235,9 +279,13 @@ extension UIColor
         
         self.init(red: newRed, green: newGreen, blue: newBlue, alpha: CGFloat(1.0))
     }
+    
+    class func pistachio() -> UIColor {
+        return UIColor(redValue: 147, greenValue: 197, blueValue: 114)
+    }
 }
 
-
+UIColor.pistachio()
 
 
 
